@@ -1,0 +1,17 @@
+{
+  "name": "button-confirm",
+  "version": "0.0.1",
+  "main": [
+    "button-confirm.js",
+    "button_confirm.html"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "components"
+  ],
+  "dependencies": {
+    "angular": ">1.2.13",
+    "ui.bootstrap": ">0.10.0"
+  }
+}
