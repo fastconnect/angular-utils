@@ -22,13 +22,10 @@ angular.module('angular-utils-ui', ['ui.bootstrap'])
     }
   ]).controller('ConfirmCtrl', ['$scope', '$attrs', '$parse',
     function($scope, $attrs, $parse) {
-
       var fn = $parse($attrs.confirmHandler);
-
       $scope.cancel = function() {
         $scope.tt_isOpen = false;
       };
-
       $scope.confirm = function() {
         console.log($attrs.confirmHandler)
         fn($scope);
@@ -46,10 +43,10 @@ var htmlTooltipConfirm = '<div class="popover {{placement}}" ng-class="{ in: isO
   '<div class="popover-content">' +
   '<div class="row" style="width: 250px;">' +
   '<div class="col-xs-6">' +
-  '<button class="btn-block btn btn-danger" ng-click="$parent.confirm()">Confirm</button>' +
+  '<button class="btn-block btn btn-success" ng-click="$parent.confirm()">Confirm</button>' +
   '</div>' +
   '<div class="col-xs-6">' +
-  '<button class="btn btn-default" ng-click="$parent.cancel()">Confirm</button>' +
+  '<button class="btn-block btn btn-danger" ng-click="$parent.cancel()">Confirm</button>' +
   '</div>' +
   '</div>' +
   '</div>' +
