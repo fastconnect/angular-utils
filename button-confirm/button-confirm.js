@@ -11,7 +11,7 @@ function ConfirmPopupDirective() {
       animation: '&',
       isOpen: '&',
     },
-    templateUrl: 'button_confirm.html',
+    templateUrl: './button_confirm.html',
   };
 }
 
