@@ -2,8 +2,7 @@
   "name": "button-confirm",
   "version": "0.0.1",
   "main": [
-    "button-confirm.js",
-    "button_confirm.html"
+    "button-confirm.js"
   ],
   "ignore": [
     "**/.*",
