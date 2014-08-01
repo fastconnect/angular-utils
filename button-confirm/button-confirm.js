@@ -1,6 +1,6 @@
 'use strict';
 
-function ConfirmPopupDirective() {
+function ConfirmPopupDirective($templateCache) {
   return {
     restrict: 'A',
     replace: true,
@@ -11,7 +11,7 @@ function ConfirmPopupDirective() {
       animation: '&',
       isOpen: '&',
     },
-    templateUrl: './button_confirm.html',
+    template: $templateCache.get('button_confirm.html');
   };
 }
 
@@ -22,14 +22,15 @@ function ConfirmPopupDirective() {
 // }
 
 angular.module('angular-utils-ui', ['ui.bootstrap'])
-  .directive('confirmPopup', ConfirmPopupDirective)
+  .directive('confirmPopup', ['$templateCache', ConfirmPopupDirective($templateCache)])
   .directive('confirm', ['$tooltip',
     function($tooltip) {
       var tt = $tooltip('confirm', 'confirm', 'click');
       tt.controller = 'ConfirmCtrl';
       return tt;
     }
-  ]).controller('ConfirmCtrl', ['$scope', '$attrs', '$parse',
+  ]).controller('ConfirmCtrl', ['$scope', '$attrs', '$parse', ''
+
     function($scope, $attrs, $parse) {
 
       var fn = $parse($attrs.confirmHandler);
