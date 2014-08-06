@@ -42,8 +42,7 @@ var htmlTooltipConfirm = '<div class="popover {{placement}}" ng-class="{ in: isO
   '<div class="popover-content">' +
   '<div class="row" style="width: 250px;">' +
   '<div class="col-xs-6">' +
-  ng - click = "$event.stopPropagation();"
-'<button class="btn-block btn btn-success" ng-click="$parent.confirm();$event.stopPropagation();">Yes</button>' +
+  '<button class="btn-block btn btn-success" ng-click="$parent.confirm();$event.stopPropagation();">Yes</button>' +
   '</div>' +
   '<div class="col-xs-6">' +
   '<button class="btn-block btn btn-danger" ng-click="$parent.cancel();$event.stopPropagation();">No</button>' +
