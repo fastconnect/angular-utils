@@ -20,21 +20,56 @@ angular.module('angular-utils-ui', ['ui.bootstrap'])
       tt.controller = 'ConfirmCtrl';
       return tt;
     }
-  ]).controller('ConfirmCtrl', ['$scope', '$attrs', '$parse',
-    function($scope, $attrs, $parse) {
+  ]).controller('ConfirmCtrl', ['$scope', '$attrs', '$parse', '$element', '$document',
+    function($scope, $attrs, $parse, $element, $document) {
+
       var fn = $parse($attrs.confirmHandler);
+
       $scope.cancel = function() {
-        $scope.tt_isOpen = false;
+        $scope.close();
       };
+
+      // execute the function
       $scope.confirm = function() {
         fn($scope);
-        $scope.tt_isOpen = false;
+        $scope.close();
       };
+
+      // 3 :  run close() when the click is outside the popover
+      var onClick = function(event) {
+        var popoverElement = $('.popover');
+        var isChild = popoverElement.has(event.target).length > 0;
+        var isSelf = popoverElement[0] == event.target;
+        var isInside = isChild || isSelf;
+        if (!isInside) {
+          $scope.close();
+        }
+      };
+
+      // 2 : handle all click outside of the popover
+      var onButtonClick = function(event) {
+        $document.bind('click', onClick);
+      };
+
+      // 1 : add 'click' action on the first button action
+      $element.bind('click', onButtonClick);
+
+      // 4 : at close action unbind all actions
+      $scope.close = function() {
+        $element.unbind('click', onButtonClick);
+        $document.unbind('click', onClick);
+        // mandatory for $tooltip() $aply handler
+        setTimeout(function() {
+          $element.click();
+          $element.bind('click', onButtonClick);
+        }, 0);
+      };
+
     }
   ]);
 
 /* HTML tooltip */
-var htmlTooltipConfirm = '<div class="popover {{placement}}" ng-class="{ in: isOpen(), fade: animation() }">' +
+var htmlTooltipConfirm = '<div class="popover {{placement}}" ng-class="{ in: isOpen(), fade: animation() }" data-toggle="popover">' +
   '<div class="arrow"></div>' +
   '<div class="popover-inner">' +
   '<h3 class="popover-title" ng-bind="title" ng-show="title"></h3>' +
